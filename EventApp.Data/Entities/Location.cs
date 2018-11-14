@@ -10,7 +10,12 @@ namespace EventApp.Data.Entities
         public string Name { get; set; }
         public string Address { get; set; }
         public short Capacity { get; set; }
-        public Decimal RentFee { get; set; }
-        public ICollection<Event> Events { get; set; }
+        public decimal RentFee { get; set; }
+
+        //(1:n) one location has multiple events
+        public virtual ICollection<Event> Events { get; set; }
+
+        //(1:n) one location has people as staffs
+        public virtual ICollection<Staff> Staffs { get; set; }
     }
 }
