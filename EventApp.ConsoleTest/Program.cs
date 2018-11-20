@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Linq;
 using EventApp.Data;
-using Microsoft.EntityFrameworkCore;
+using EventApp.Services;
+using System.Collections.Generic;
+using EventApp.Data.DTOS;
 
 namespace EventApp.ConsoleTest
 {
@@ -9,9 +10,13 @@ namespace EventApp.ConsoleTest
     {
         public static void Main(string[] args)
         {
-            var context = new EventAppContext();
+            var Context = new EventAppContext();
+            TestServices test = new TestServices();
+            foreach (var y in test.Query12())
+            {
+                Console.WriteLine(y.Email);
+            }
 
-           
         }
     }
 }

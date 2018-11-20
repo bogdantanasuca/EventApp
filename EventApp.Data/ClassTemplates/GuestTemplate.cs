@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EventApp.Data.Entities
+namespace EventApp.Data.ClassTemplates
 {
-    public class Guest
+    public class GuestTemplate
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -12,6 +12,5 @@ namespace EventApp.Data.Entities
         public string Phone { get; set; }
         public string Email { get; set; }
         public int Age { get; set; }
-        public virtual ICollection<EventGuest> eventGuests { get; set; }
     }
 }

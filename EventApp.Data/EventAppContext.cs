@@ -31,7 +31,7 @@ namespace EventApp.Data
             modelBuilder.Entity<EventGuest>()
                 .HasKey(a => new { a.EventId, a.GuestId });
 
-            
+
         }
     }
 }
