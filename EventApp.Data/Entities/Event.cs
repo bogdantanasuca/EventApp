@@ -14,7 +14,7 @@ namespace EventApp.Data.Entities
         public string Description { get; set; }
 
         //references Locations Table; (1:1)
-        public int LocationId { get; set; } 
+        public int LocationId { get; set; }
         public virtual Location Location { get; set; }
 
         //references EventTypes Table (1:1)
@@ -22,6 +22,5 @@ namespace EventApp.Data.Entities
         public virtual EventType EventType { get; set; }
 
         public virtual ICollection<EventGuest> EventGuests { get; set; }
-
     }
 }

@@ -1,22 +1,33 @@
-﻿using System;
-using EventApp.Data;
-using EventApp.Services;
-using System.Collections.Generic;
-using EventApp.Data.DTOS;
+﻿using EventApp.Services.Events;
+using EventApp.Services.Infrastructure;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 
-namespace EventApp.ConsoleTest
+namespace EventApp.Services
 {
     public class Program
     {
-        public static void Main(string[] args)
+        private static IConfigurationRoot GetConfiguration()
         {
-            var Context = new EventAppContext();
-            TestServices test = new TestServices();
-            foreach (var y in test.Query12())
-            {
-                Console.WriteLine(y.Email);
-            }
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appSettings.json", optional: false, reloadOnChange: true);
 
+            return builder.Build();
+        }
+
+        static void Main(string[] args)
+        {
+            var services = DependencyMapper.GetDependencies(GetConfiguration()).BuildServiceProvider();
+
+            using (var scope = services.CreateScope())
+            {
+                var eventService = scope.ServiceProvider.GetService<IEventService>();
+                var events = eventService.GetEventsByName("wed");
+                foreach (var item in events)
+                    System.Console.WriteLine(item.Name);
+            }
         }
     }
 }

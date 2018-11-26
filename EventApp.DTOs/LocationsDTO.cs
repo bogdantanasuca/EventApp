@@ -3,10 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EventApp.Data.DTOS
+namespace EventApp.DTOs
 {
-    public class GuestsDTO:GuestTemplate
+    public class LocationsDTO : LocationTemplate
     {
-
     }
 }

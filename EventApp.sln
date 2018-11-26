@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventApp.Data", "EventApp.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventApp.ConsoleTest", "EventApp.ConsoleTest\EventApp.ConsoleTest.csproj", "{A0E415F8-EAB0-45AB-AF43-71F82E7709DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventApp.Services", "EventApp.Services\EventApp.Services.csproj", "{754FBBF2-B688-4AF5-A20B-2971ABBABE06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventApp.Services", "EventApp.Services\EventApp.Services.csproj", "{754FBBF2-B688-4AF5-A20B-2971ABBABE06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventApp.DTOs", "EventApp.DTOs\EventApp.DTOs.csproj", "{264B1C2D-8089-4482-BE3C-CF8ABD02F088}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{754FBBF2-B688-4AF5-A20B-2971ABBABE06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{754FBBF2-B688-4AF5-A20B-2971ABBABE06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{754FBBF2-B688-4AF5-A20B-2971ABBABE06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{264B1C2D-8089-4482-BE3C-CF8ABD02F088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{264B1C2D-8089-4482-BE3C-CF8ABD02F088}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{264B1C2D-8089-4482-BE3C-CF8ABD02F088}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{264B1C2D-8089-4482-BE3C-CF8ABD02F088}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

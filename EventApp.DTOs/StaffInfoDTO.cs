@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EventApp.Data.DTOS
+namespace EventApp.DTOs
 {
-    public class GuestNameDTO
+    public class StaffInfoDTO
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
     }
 }
