@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EventApp.Data.ClassTemplates
+namespace EventApp.DTOs
 {
-    public class LocationTemplate
+    public class LocationDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

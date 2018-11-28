@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EventApp.Data.ClassTemplates
+﻿namespace EventApp.DTOs
 {
-    public class GuestTemplate
+    public class GuestDTO
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

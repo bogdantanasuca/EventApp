@@ -1,6 +1,7 @@
 ﻿using EventApp.Data;
 using EventApp.Data.Infrastructure;
 using EventApp.Services.Events;
+using EventApp.Services.Locations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ namespace EventApp.Services.Infrastructure
             services.AddDbContext<EventAppDataContext>(options => options.UseSqlServer(connection));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IEventService, EventService>();
+            services.AddScoped<ILocationService, LocationService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

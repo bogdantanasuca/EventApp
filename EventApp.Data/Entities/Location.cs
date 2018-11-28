@@ -1,5 +1,4 @@
-﻿using EventApp.Data.ClassTemplates;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 

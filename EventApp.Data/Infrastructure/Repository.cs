@@ -13,7 +13,7 @@ namespace EventApp.Data.Infrastructure
 
         public Repository(EventAppDataContext context)
         {
-            this.context = context;      
+            this.context = context;
             dbset = context.Set<T>();
         }
 
@@ -22,9 +22,14 @@ namespace EventApp.Data.Infrastructure
             dbset.Add(entity);
         }
 
-        public IEnumerable<T> Query(Expression<Func<T, bool>> where)
+        public IEnumerable<T> Get(Expression<Func<T, bool>> where)
         {
             return dbset.Where(where).ToList();
+        }
+
+        public IQueryable<T> Query()
+        {
+            return dbset.AsQueryable();
         }
     }
 }
