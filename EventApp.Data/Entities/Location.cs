@@ -4,7 +4,6 @@ using System.Text;
 
 namespace EventApp.Data.Entities
 {
-
     public class Location
     {
         public int Id { get; set; }

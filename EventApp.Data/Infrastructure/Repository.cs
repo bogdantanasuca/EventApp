@@ -22,6 +22,32 @@ namespace EventApp.Data.Infrastructure
             dbset.Add(entity);
         }
 
+        public void Update(T entity)
+        {
+            dbset.Attach(entity);
+            context.Entry(entity).State = EntityState.Modified;
+        }
+
+        public List<T> GetAll()
+        {
+            return dbset.ToList();
+        }
+
+        public void Delete(T entity)
+        {
+            dbset.Remove(entity);
+        }
+
+        public void Delete(IEnumerable<T> entities)
+        {
+            dbset.RemoveRange(entities);
+        }
+
+        public T GetById(int id)
+        {
+            return dbset.Find(id);
+        }
+
         public IEnumerable<T> Get(Expression<Func<T, bool>> where)
         {
             return dbset.Where(where).ToList();

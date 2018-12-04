@@ -12,8 +12,8 @@ namespace EventApp.Services.Events
         IEnumerable<EventDTO> GetEventsByDate(DateTime eventDate);
         IEnumerable<EventDTO> GetEventsByLocationId(int locationId);
         IEnumerable<EventDTO> GetEventsBySize(EventSize eventSize);
+        void DeleteEventByID(int eventId);
         int CreateEvent(EventDTO eventDTO);
-        int AddGuestsToEvent(List<EventGuestDTO> guests);
-        void ChangeEventLocation(int eventId, LocationDTO location);
+        int AddGuestsToEvent(int eventId, List<GuestDTO> guests);
     }
 }

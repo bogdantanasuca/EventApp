@@ -8,7 +8,9 @@ namespace EventApp.Services.Locations
     public interface ILocationService
     {
         IEnumerable<LocationDTO> GetLocations();
-        int CreateLocation(LocationDTO location);
+        int CreateLocation(LocationDTO locationDTO);
         int AddStaffToLocation(List<StaffDTO> staff);
+        void DeleteLocationById(int locationID);
+        void ChangeEventLocation(int eventId, LocationDTO location);
     }
 }

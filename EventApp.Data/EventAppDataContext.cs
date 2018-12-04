@@ -5,11 +5,11 @@ using Microsoft.Extensions.Logging.Console;
 
 namespace EventApp.Data
 {
-    public class EventAppDataContext:DbContext
+    public class EventAppDataContext : DbContext
     {
-        private static readonly LoggerFactory LoggerFactory = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true,true)});
+        private static readonly LoggerFactory LoggerFactory = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
 
-        public virtual DbSet<Staff> Staffs{ get; set; }
+        public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Guest> Guests { get; set; }
         public virtual DbSet<Location> Locations { get; set; }

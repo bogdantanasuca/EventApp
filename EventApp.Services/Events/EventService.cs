@@ -8,6 +8,7 @@ using System;
 using EventApp.Data.Enums;
 using Microsoft.EntityFrameworkCore;
 using EventApp.Services.Locations;
+using EventApp.Services.Guests;
 
 namespace EventApp.Services.Events
 {
@@ -16,14 +17,16 @@ namespace EventApp.Services.Events
         private readonly IRepository<Event> eventRepo;
         private readonly IRepository<EventGuest> eventGuestRepo;
         private readonly IUnitOfWork unitOfWork;
-        private readonly ILocationService locationService;
+        private readonly IGuestService guestService;
+        private readonly IRepository<Guest> guestRepo;
 
-        public EventService(IRepository<Event> eventRepo, IUnitOfWork unitOfWork, IRepository<EventGuest> eventGuestRepo, ILocationService locationService)
+        public EventService(IRepository<Event> eventRepo, IUnitOfWork unitOfWork, IRepository<EventGuest> eventGuestRepo, IGuestService guestService, IRepository<Guest> guestRepo)
         {
             this.eventRepo = eventRepo;
             this.unitOfWork = unitOfWork;
             this.eventGuestRepo = eventGuestRepo;
-            this.locationService = locationService;
+            this.guestService = guestService;
+            this.guestRepo = guestRepo;
         }
 
         public IEnumerable<EventDTO> GetEvents()
@@ -57,28 +60,53 @@ namespace EventApp.Services.Events
                                                .GroupBy(e => e.Event)
                                                .Where(g => g.Count() < (int)eventSize)
                                                .Select(g => new EventDTO().InjectFrom(g.Key) as EventDTO);
-
         }
 
         public int CreateEvent(EventDTO eventDTO)
         {
-            eventRepo.Add((Event)new Event().InjectFrom(eventDTO));
+            var newEvent = (Event)new Event().InjectFrom(eventDTO);
+            eventRepo.Add(newEvent);
             unitOfWork.Commit();
-            return eventRepo.Query().Select(e => e.Id).Last();
+            return newEvent.Id;
         }
 
-        public int AddGuestsToEvent(List<EventGuestDTO> guests)
+        public int AddGuestsToEvent(int eventId, List<GuestDTO> guests)
         {
-            guests.ForEach(x => eventGuestRepo.Add((EventGuest)new EventGuest().InjectFrom(x)));
-            unitOfWork.Commit();
+            foreach (var guest in guests)
+            {
+                var dataGuest = guestRepo.Get(e => e.FirstName == guest.FirstName && e.LastName == guest.LastName && e.Phone == guest.Phone).Select(g => g.Id).FirstOrDefault();
+                EventGuestDTO eventGuest = null;
+                if (dataGuest == 0)
+                {
+                    var guestID = guestService.CreateGuest(guest);
+                    eventGuest = new EventGuestDTO
+                    {
+                        EventId = eventId,
+                        GuestId = guestID
+                    };
+                }
+                else
+                {
+                    eventGuest = new EventGuestDTO
+                    {
+                        EventId = eventId,
+                        GuestId = dataGuest
+                    };
+                }
+                    var newEventGuest = (EventGuest)new EventGuest().InjectFrom(eventGuest);
+                    eventGuestRepo.Add(newEventGuest);
+                    unitOfWork.Commit();
+            }
             return 0;
         }
 
-        public void ChangeEventLocation(int eventId, LocationDTO location)
+        public void DeleteEventByID(int eventId)
         {
-            var LocationID = locationService.CreateLocation(location);
-            var Event = eventRepo.Get(x => x.Id == eventId).FirstOrDefault();
-            Event.LocationId = LocationID;
+            foreach (var item in eventGuestRepo.Get(x => x.EventId == eventId).ToList())
+            {
+                eventGuestRepo.Delete((EventGuest)new EventGuest().InjectFrom(item));
+            }
+            eventRepo.Delete(eventRepo.GetById(eventId));
             unitOfWork.Commit();
         }
     }
