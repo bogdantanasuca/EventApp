@@ -1,14 +1,13 @@
-﻿using EventApp.DTOs;
+﻿using EventApp.Data.Entities;
+using EventApp.Data.Enums;
 using EventApp.Data.Infrastructure;
-using System.Collections.Generic;
-using System.Linq;
-using EventApp.Data.Entities;
+using EventApp.DTOs;
+using EventApp.Services.Guests;
+using Microsoft.EntityFrameworkCore;
 using Omu.ValueInjecter;
 using System;
-using EventApp.Data.Enums;
-using Microsoft.EntityFrameworkCore;
-using EventApp.Services.Locations;
-using EventApp.Services.Guests;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace EventApp.Services.Events
 {
@@ -93,9 +92,9 @@ namespace EventApp.Services.Events
                         GuestId = dataGuest
                     };
                 }
-                    var newEventGuest = (EventGuest)new EventGuest().InjectFrom(eventGuest);
-                    eventGuestRepo.Add(newEventGuest);
-                    unitOfWork.Commit();
+                var newEventGuest = (EventGuest)new EventGuest().InjectFrom(eventGuest);
+                eventGuestRepo.Add(newEventGuest);
+                unitOfWork.Commit();
             }
             return 0;
         }
