@@ -1,5 +1,6 @@
 ﻿
 using EventApp.DTOs;
+using System.Collections.Generic;
 
 namespace EventApp.Services.Guests
 {
@@ -8,5 +9,6 @@ namespace EventApp.Services.Guests
     {
         int CreateGuest(GuestDTO guest);
         void DeleteByID(int guestID);
+        List<GuestDTO> GetGuestsByEventId(int eventId);
     }
 }

@@ -23,7 +23,7 @@ namespace EventApp.Services
 
         static void Main(string[] args)
         {
-            var services = DependencyMapper.GetDependencies(GetConfiguration()).BuildServiceProvider();
+            var services = ServicesDependencyMapper.GetDependencies(GetConfiguration()).BuildServiceProvider();
 
             using (var scope = services.CreateScope())
             {

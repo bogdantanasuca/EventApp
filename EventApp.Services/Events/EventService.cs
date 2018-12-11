@@ -35,7 +35,7 @@ namespace EventApp.Services.Events
 
         public IEnumerable<EventDTO> GetEventsByName(string eventName)
         {
-            return eventRepo.Get(e => e.Name.Contains(eventName))
+            return eventRepo.Get(e => e.Name.ToLower().Contains(eventName))
                             .Select(e => new EventDTO().InjectFrom(e) as EventDTO);
         }
 
@@ -106,6 +106,20 @@ namespace EventApp.Services.Events
                 eventGuestRepo.Delete((EventGuest)new EventGuest().InjectFrom(item));
             }
             eventRepo.Delete(eventRepo.GetById(eventId));
+            unitOfWork.Commit();
+        }
+
+        public EventDTO GetEventById(int id)
+        {
+            if (eventRepo.GetById(id) == null)
+                return null;
+            else
+                return (EventDTO)new EventDTO().InjectFrom(eventRepo.GetById(id));
+        }
+
+        public void UpdateEvent(EventDTO eventDTO)
+        {
+            eventRepo.Update((Event)new Event().InjectFrom(eventDTO));
             unitOfWork.Commit();
         }
     }

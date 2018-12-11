@@ -2,6 +2,7 @@
 using EventApp.Data.Infrastructure;
 using EventApp.DTOs;
 using Omu.ValueInjecter;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EventApp.Services.Guests
@@ -12,7 +13,7 @@ namespace EventApp.Services.Guests
         private readonly IUnitOfWork unitOfWork;
         private readonly IRepository<EventGuest> eventGuestRepo;
 
-        public GuestService(IRepository<Guest> guestRepo, IUnitOfWork unitOfWork,IRepository<EventGuest> eventGuestRepo)
+        public GuestService(IRepository<Guest> guestRepo, IUnitOfWork unitOfWork, IRepository<EventGuest> eventGuestRepo)
         {
             this.guestRepo = guestRepo;
             this.unitOfWork = unitOfWork;
@@ -34,6 +35,12 @@ namespace EventApp.Services.Guests
 
             guestRepo.Delete(guestRepo.GetById(guestID));
             unitOfWork.Commit();
+        }
+
+        public List<GuestDTO> GetGuestsByEventId(int eventId)
+        {
+            var eventGuests = eventGuestRepo.Query().Where(eg => eg.EventId == eventId).ToList();
+            return eventGuests.Select(x => (GuestDTO)new GuestDTO().InjectFrom(guestRepo.Query().Where(g => g.Id == x.GuestId).FirstOrDefault())).ToList();
         }
     }
 }

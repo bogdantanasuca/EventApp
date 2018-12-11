@@ -11,7 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventApp.Services", "EventA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventApp.DTOs", "EventApp.DTOs\EventApp.DTOs.csproj", "{264B1C2D-8089-4482-BE3C-CF8ABD02F088}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventApp.Web", "EventApp.Web\EventApp.Web.csproj", "{730554F9-3D90-4972-B505-2688031A185C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventApp.Web", "EventApp.Web\EventApp.Web.csproj", "{730554F9-3D90-4972-B505-2688031A185C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{754FBBF2-B688-4AF5-A20B-2971ABBABE06} = {754FBBF2-B688-4AF5-A20B-2971ABBABE06}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

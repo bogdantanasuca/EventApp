@@ -1,0 +1,106 @@
+﻿@using EventApp.Web.Models.Guest;
+@model EventApp.Web.Models.Event.EventDetailsViewModel
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var x = new GuestViewModel();
+}
+<h2>Detail</h2>
+<div>
+    <h4>EventModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LocationId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EventTypeId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EventTypeId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedBudget)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedBudget)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+@if (Model.EventGuests.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <label asp-for="EventGuests[0].FirstName"></label>
+                </th>
+                <th>
+                    <label asp-for="EventGuests[0].LastName"></label>
+                </th>
+                <th>
+                    <label asp-for="EventGuests[0].Email"></label>
+                </th>
+                <th>
+                    <label asp-for="EventGuests[0].Age"></label>
+                </th>
+                <th>
+                    <label asp-for="EventGuests[0].Phone"></label>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.EventGuests)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
